@@ -23,9 +23,12 @@ int main() {
     // Generate all subarrays
     for(int i=0; i<n; i++) {
         for(int j=i; j<n; j++) {
-            currentSum = 0;
-            
-            currentSum = cumSum[j] - cumSum[i-1];
+            if(i-1 > 0) {
+                currentSum = cumSum[j] - cumSum[i-1];
+            }
+            else {
+                currentSum = cumSum[j];
+            }
 
             if(currentSum > maximumSum) {
                 maximumSum = currentSum;
