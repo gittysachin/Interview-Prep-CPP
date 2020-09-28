@@ -4,29 +4,25 @@ using namespace std;
 int main(){
     int n;
     cin>>n;
-    int a[1000];
-
-    int cs = 0;   // int cs = INT_MIN; for negative numbers
-    int ms = 0;   // int ms = INT_MIN; for negative numbers
+    int nums[1000];
 
     for(int i=0; i<n; i++) {
-        cin >> a[i];
-    }
-
-    // Kadane's Algorithm for maximum subarray sum 
-    // Kadane's algorithm her is used  for only non-negative numbers 
-
-    for(int i=0; i<n; i++) {
-        cs = cs + a[i];
-
-        if(cs < 0) {
-            cs = 0;
-        }
-
-        ms = max(cs, ms);
+        cin >> nums[i];
     }
     
-    cout<< "Maximum sum is " << ms<<endl;
+    // Kadane's algorithm requires atleast one positive number in the array
+    // But if all the number are -ve then the answer will simply be the least -ve number, that we can easily find. In that case we can modify the code (entirely) a little bit.
+
+    int sum = 0;
+    int maxi = INT_MIN;
+    
+    for(int i=0; i<n; i++) {
+        sum = sum + nums[i];
+        maxi = max(sum, maxi);
+        if(sum < 0) sum = 0;
+    }
+    
+    cout<< "Maximum sum is " << maxi <<endl;
 
     return 0;
 
